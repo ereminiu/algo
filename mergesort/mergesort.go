@@ -4,7 +4,19 @@ func merge(a *[]int, b *[]int) []int {
 	n, m := len(*a), len(*b)
 	i, j, k := 0, 0, 0
 	ret := make([]int, n+m)
-	for i < n && j < m {
+	for k < n+m {
+		if i == n {
+			ret[k] = (*b)[j]
+			j++
+			k++
+			continue
+		} else if j == m {
+			ret[k] = (*a)[i]
+			i++
+			k++
+			continue
+		}
+
 		if (*a)[i] < (*b)[j] {
 			ret[k] = (*a)[i]
 			i++
@@ -12,14 +24,6 @@ func merge(a *[]int, b *[]int) []int {
 			ret[k] = (*b)[j]
 			j++
 		}
-		k++
-	}
-	for ; i < n; i++ {
-		ret[k] = (*a)[i]
-		k++
-	}
-	for ; j < m; j++ {
-		ret[k] = (*b)[j]
 		k++
 	}
 	return ret
