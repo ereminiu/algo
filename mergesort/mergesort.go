@@ -35,6 +35,7 @@ func devide(nums *[]int, l, r int) []int {
 	return merge(&left, &right)
 }
 
+// usage: a = Sort(&a) where a is int slice
 func Sort(nums *[]int) []int {
 	return devide(nums, 0, len(*nums))
 }
