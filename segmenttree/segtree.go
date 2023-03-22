@@ -41,28 +41,36 @@ func (t *Tree) build(v, vl, vr int, a *[]int) {
 	t.tr[v] = merge(t.tr[2*v+1], t.tr[2*v+2])
 }
 
-func (t *Tree) GetMax(v, vl, vr, l, r int) Node {
-	if vl > l && vr < r {
+func (t *Tree) getMax(v, vl, vr, l, r int) Node {
+	if vl >= l && vr <= r {
 		return t.tr[v]
 	}
-	if vl > r || vr < l {
+	if vl >= r || vr <= l {
 		return Node{net}
 	}
 	mid := (vl + vr) / 2
-	lf, rg := t.GetMax(2*v+1, vl, mid, l, r), t.GetMax(2*v+2, mid, vr, l, r)
+	lf, rg := t.getMax(2*v+1, vl, mid, l, r), t.getMax(2*v+2, mid, vr, l, r)
 	return merge(lf, rg)
 }
 
-func (t *Tree) Update(v, vl, vr, idx, val int) {
+func (t *Tree) GetMax(l, r int) int {
+	return t.getMax(0, 0, t.n, l, r).val
+}
+
+func (t *Tree) update(v, vl, vr, idx, val int) {
 	if vr-vl == 1 {
 		t.tr[v] = Node{val}
 		return
 	}
 	mid := (vl + vr) / 2
 	if idx < mid {
-		t.Update(2*v+1, vl, mid, idx, val)
+		t.update(2*v+1, vl, mid, idx, val)
 	} else {
-		t.Update(2*v+2, mid, vr, idx, val)
+		t.update(2*v+2, mid, vr, idx, val)
 	}
 	t.tr[v] = merge(t.tr[2*v+1], t.tr[2*v+2])
+}
+
+func (t *Tree) Update(idx, val int) {
+	t.update(0, 0, t.n, idx, val)
 }
