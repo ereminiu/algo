@@ -1,72 +1,21 @@
 package main
 
-import (
-	"fmt"
-	"sort"
-	"time"
+import "github.com/ereminiu/algo/utils"
 
-	"github.com/ereminiu/algo/fastmergesort"
-	"github.com/ereminiu/algo/quicksortv3"
-	"github.com/ereminiu/algo/utils"
-)
+func testSegTree(times int) {
+	for it := 0; it < times; it++ {
+		a := utils.RandSlice(7)
 
-func averageTimeBuiltin(times int) time.Duration {
-	ret := time.Duration(0)
+		func(l, r int) int {
 
-	for i := 0; i < times; i++ {
-		start := time.Now()
+		}
 
-		N := 1000000
-		a := utils.RandSlice(N)
-		sort.Ints(a)
+		for rep := 0; rep < 100; rep++ {
 
-		ret += time.Now().Sub(start)
+		}
+
 	}
-
-	return ret / time.Duration(times)
-}
-
-func averageTimeQuick(times int) time.Duration {
-	ret := time.Duration(0)
-
-	for i := 0; i < times; i++ {
-		start := time.Now()
-
-		N := 1000000
-		a := utils.RandSlice(N)
-		quicksortv3.Sort(&a)
-
-		ret += time.Now().Sub(start)
-	}
-
-	return ret / time.Duration(times)
-}
-
-func averageTimeMerge(times int) time.Duration {
-	ret := time.Duration(0)
-
-	for i := 0; i < times; i++ {
-		start := time.Now()
-
-		N := 1000000
-		a := utils.RandSlice(N)
-		fastmergesort.Sort(&a)
-
-		ret += time.Now().Sub(start)
-	}
-
-	return ret / time.Duration(times)
 }
 
 func main() {
-	// a := utils.RandSlice(8)
-	// fmt.Println(a)
-
-	// Sort(&a)
-
-	// fmt.Println(a)
-
-	fmt.Println(averageTimeQuick(12))
-	fmt.Println(averageTimeMerge(12))
-	fmt.Println(averageTimeBuiltin(12))
 }
